@@ -1,0 +1,57 @@
+#{extends 'main.html' /}
+#{set title:'Ranking' /}
+<head>
+<link href="@{'/public/LoginCss/login.css'}" rel="stylesheet">
+</head>
+<meta charset="utf-8">
+<div class="container" id="c1">
+<div class="d-flex justify-content-center h-100">
+<div class="card">
+<div class="card-header" id="c1">Ranking </div>
+<div class="card-body">
+    <form action="@{Contas.pontuacao}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="conta.id" value="${conta?.id}">
+    
+  
+    <div class="form-group">
+    <div class="form-row">
+        <div class="col-md-12">
+            <label for="pontuacao">Ranking </label>
+            <input class="form-control #{ifError 'conta.pontuacao'} is-invalid#{/ifError}" id="pontuacao" type="text" value="${conta== null ? flash['conta.pontuacao'] : conta.pontuacao}" name="conta.pontuacao" aria-describedby="nomeHelp">                            #{ifError 'conta.pontuacao'}
+            <div class="invalid-feedback">#{error 'conta.pontuacao' /}</div>
+            #{/ifError}
+        </div>
+
+    </div>
+</div>
+<div class="form-group">
+    <label for="tiroAgua">Total de Tiros na Águal</label>
+    <input class="form-control #{ifError 'conta.tiroAgua'} is-invalid#{/ifError}" id="tiroAgua" type="text" value="${conta == null ? flash['conta.tiroAgua'] : conta.tiroAgua}" name="conta.tiroAgua" aria-describedby="emailHelp">                    #{ifError 'conta.tiroAgua'}
+    <div class="invalid-feedback">#{error 'conta.tiroAgua' /}</div>
+    #{/ifError}
+</div>
+
+<div class="form-group">
+<label for="totBarcosAfundados">Total de Barcos Afundados</label>
+<input class="form-control #{ifError 'conta.totBarcosAfundados'} is-invalid#{/ifError}" id="totBarcosAfundados" type="text" value="${conta == null ? flash['conta.totBarcosAfundados'] : conta.totBarcosAfundados}" name="conta.totBarcosAfundados" aria-describedby="emailHelp">                    #{ifError 'conta.totBarcosAfundados'}
+<div class="invalid-feedback">#{error 'conta.totBarcosAfundados' /}</div>
+#{/ifError}
+</div>
+
+
+
+<div class="form-group">
+    <div class="form-row">
+        <div class="col-md-6">
+            <input class="btn btn-success btn-block" type="submit" value="Novo Jogo">
+        </div>
+        <div class="col-md-6">
+            <a href="@{Application.index}" class="btn btn-danger btn-block">Sair do Jogo</a>
+        </div>
+    </div>
+
+</form>
+</div>
+</div>
+</div>
+<div>

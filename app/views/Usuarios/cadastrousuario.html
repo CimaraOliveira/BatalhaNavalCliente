@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Batalha Naval</title>
+    <title>#{get 'Batalha Naval'/}</title>
+
+    <link href="@{'/public/bootstrap/vendor/bootstrap/css/bootstrap.min.css'}" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="@{'/public/bootstrap/vendor/font-awesome/css/font-awesome.min.css'}" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="@{'/public/bootstrap/vendor/datatables/dataTables.bootstrap4.css'}" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="@{'/public/bootstrap/css/sb-admin.css'}" rel="stylesheet">
+    <link href="https://rawgit.com/RobinHerbots/Inputmask/4.x/css/inputmask.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link href="@{'/public/LoginCss/login.css'}" rel="stylesheet">
+</head>
+
+<body>
+
+    #{if flash.error}
+
+    <div class="alert alert-danger">
+        <b>
+	<center><p>${flash.error.raw()}</p></center>
+</b>
+    </div>
+
+    #{/if}
+    <div class="card card-register mx-auto mt-5">
+        <div class="card-header">Criar conta </div>
+        <div class="card-body">
+            <form action="@{Usuarios.salvarUsuario}" method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <label for="nome">Nome</label>
+                            <input class="form-control #{ifError 'usuario.nome'} is-invalid#{/ifError}" id="nome" type="text" value="${usuario == null ? flash['usuario.nome'] : usuario.nome}" name="usuario.nome" aria-describedby="nomeHelp" placeholder="Username">                            #{ifError 'usuario.nome'}
+                            <div class="invalid-feedback">#{error 'usuario.nome' /}</div>
+                            #{/ifError}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input class="form-control #{ifError 'usuario.email'} is-invalid#{/ifError}" id="email" type="text" value="${usuario == null ? flash['usuario.email'] : usuario.email}" name="usuario.email" aria-describedby="emailHelp" placeholder="E-mail">                    #{ifError 'usuario.email'}
+                    <div class="invalid-feedback">#{error 'usuario.email' /}</div>
+                    #{/ifError}
+                </div>
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <label for="senha">Senha</label> <input class="form-control" placeholder="Passworld" name="usuario.senha" type="password" value="" id="senha">
+                            <div class="invalid-feedback"></div>
+                        </div>
+
+                        <!--<div class="col-md-6">
+                            <label for="confirmar">Confirmar Senha</label> <input class="form-control" type="passworld" id="confirma"
+                            placeholder="Confirm Password" name="confirmarSenha" type="password" value="">
+                            <div class="invalid-feedback"></div>-->
+                            
+                            <div class="col-md-6">
+                            <label for="senha">Confirmar Senha</label> <input class="form-control" placeholder="Confirm Password" name="confirmarSenha" type="password" value="">
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <input class="btn btn-success btn-block" type="submit" value="Cadastrar">
+                        </div>
+                        <div class="col-md-6">
+                            <a href="@{Logins.login}" class="btn btn-danger btn-block">Cancelar</a>
+                        </div>
+                    </div>
+
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+</body>
+
+</html>

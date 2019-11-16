@@ -1,0 +1,21 @@
+#{extends 'Jogos/jogar.html' /} 
+ #{set title:'Home' /}
+
+
+
+ <div class="container">
+ <div class="d-flex justify-content-center h-100">
+    <div class="card" id="playcard"> 
+
+       <div class="card-body">
+           <form action="@{Jogos.jogar}" method="post">
+               <div class="form-group">
+                   <input type="submit" class="btn  play_btn" value="Play">
+               </div>
+           </form>
+       </div>
+
+   </div>
+</div>
+</div>
+</div>

@@ -1,0 +1,44 @@
+#{extends 'mainAdministrador.html' /}
+#{set title:'Listar Jogadores' /}
+
+<div class="card mb-3 container">
+<meta charset="UTF-8"/>
+ <div class="card-header">
+   <i class="fa fa-table"></i> Listagem de Jogadores</div>
+ <div class="card-body">
+    
+     <table class="table dataTable" id="dataTable">
+       <thead>
+         <th rowspan="1" colspan="1">Inicio do Jogo</th>
+         <th rowspan="1" colspan="1">Final de Jogo</th>
+         <th rowspan="1" colspan="1">Pontuação</th>
+         
+
+         <th>Ações</th>
+       </thead>
+       <tbody>
+    #{list items:inicioJogos, as:'iniciajogo'}
+	#{list items:frenteDeCaixas, as:'frenteDeCaixa'}
+		<tr role="row">
+           <td>${iniciajogo.inicioJogo}</td>
+           <td>${iniciajogo.finalJogo}</td>
+           <td>${iniciajogo.pontuacao}</td>
+          
+           
+         </tr>
+	#{/list}
+	</tbody>
+	
+    </table>
+    <br><br>
+    <div class="form-group col-md-2">
+			<a href="@{Administradores.administrador}" class="btn btn-danger btn-block">Sair</a>
+		</div>
+  </div>
+</div>
+
+	<div class="row">
+		
+		
+	</div>
+  

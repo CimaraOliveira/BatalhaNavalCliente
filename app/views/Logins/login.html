@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="505676379798-3hal9ksn2l6dgd7k716siroqt8ojhknj.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <title>Batalha Naval</title>
+    <!--Made with love by Mutiullah Samim -->
+
+    <!--Bootsrap 4 CDN-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Custom styles-->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="@{'/public/LoginCss/login.css'}" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+
+    #{if flash.error}
+
+    <div class="alert alert-danger">
+        <b>
+					<center><p>${flash.error.raw()}</p></center>
+				</b>
+    </div>
+
+    #{/if}
+
+
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card card-login mx-auto mt-10">
+
+                <div class="card-header">
+                    <h3>Batalha Naval</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <span><i class="fab fa-facebook-square"></i></span>
+                        <span><i class="fab fa-google-plus-square"> </i></span>
+                        
+                        <script>
+                        function onSignIn(response) {
+                              // Conseguindo as informações do seu usuário:
+                              var perfil = response.getBasicProfile();
+                   
+                              // Conseguindo o ID do Usuário
+                              var userID = perfil.getId();
+                   
+                              // Conseguindo o Nome do Usuário
+                              var userName = perfil.getName();
+                   
+                              // Conseguindo o E-mail do Usuário
+                              var userEmail = perfil.getEmail();
+                   
+                              // Conseguindo a URL da Foto do Perfil
+                              var userPicture = perfil.getImageUrl();
+                   
+                              document.getElementById('user-photo').src = userPicture;
+                              document.getElementById('user-name').innerText = userName;
+                              document.getElementById('user-email').innerText = userEmail;
+                   
+                              // Recebendo o TOKEN que você usará nas demais requisições à API:
+                              var LoR = response.getAuthResponse().id_token;
+                              console.log("~ le Tolkien: " + LoR);
+                          };
+                      </script>
+
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="@{Logins.autenticar}" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Usuário</label>
+                            <input class="form-control" id="exampleInputEmail1" type="login" placeholder="User" name="login">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Senha</label>
+                            <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Passworld" name="senha">
+                        </div>
+
+                        <input class="btn float-right login_btn" type="submit" value="Entrar">
+                    </form>
+                    <div class="text">
+                        <center>
+                            <a style="color:yellow " class="d-block small mt-4" href="@{Usuarios.cadastrousuario}">Criar Conta</a>
+                            <a style="color:yellow " class="d-block small mt-3" href="@{Usuarios.recuperaSenha}">Esqueceu sua Senha?</a>
+                        </center>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="@{'/public/bootstrap/vendor/jquery/jquery.min.js'}"></script>
+    <script src="@{'/public/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js'}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="@{'/public/bootstrap/vendor/jquery-easing/jquery.easing.min.js'}"></script>
+</body>
+
+</html>

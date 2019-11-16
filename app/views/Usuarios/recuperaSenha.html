@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Batalha Naval</title>
+    <title>#{get 'Batalha Naval'/}</title>
+
+    <link href="@{'/public/bootstrap/vendor/bootstrap/css/bootstrap.min.css'}" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="@{'/public/bootstrap/vendor/font-awesome/css/font-awesome.min.css'}" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <link href="@{'/public/bootstrap/vendor/datatables/dataTables.bootstrap4.css'}" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="@{'/public/bootstrap/css/sb-admin.css'}" rel="stylesheet">
+    <link href="https://rawgit.com/RobinHerbots/Inputmask/4.x/css/inputmask.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link href="@{'/public/LoginCss/login.css'}" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+
+    #{if flash.error}
+
+    <div class="alert alert-danger">
+        <b>
+		<center><p>${flash.error.raw()}</p></center>
+	</b>
+    </div>
+
+    #{/if}
+
+
+    <div class="card card-register mx-auto mt-5" id="recuperar">
+        <div class="card-header">Recuperar Senha</div>
+
+        <div class="card-body">
+            <form action="@{Usuarios.novaSenha}" method="post">
+                <div class="modal-body" align="left">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">E-mail:</label> <input class="form-control" id="Email" placeholder="E-mail" name="usuario.email" type="email">
+                    </div>
+                </div>
+
+                <!--  <div class="card-body">
+       <form action="@{Usuarios.novaSenha}" method="post">
+		<div class="modal-body" align="left">
+			<div class="form-group">
+				<label for="formGroupExampleInput">E-mail:</label> <input
+					class="form-control" id="Email" placeholder="E-mail" name="cliente.email" type="email">
+			</div>
+		</div>-->
+
+
+                <div class="modal-footer">
+                    <button type="submit" class=" btn btn-lg btn-success">Enviar</button>
+                    <button type="button" href="@{Logins.login}" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancelar</button>
+                    <!--- <a href="@{Logins.login}" class="btn btn-danger btn-block">Cancelar</a>-->
+                </div>
+            </form>
+
+        </div>
+    </div>
+    </div>
+   
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+
+</html>

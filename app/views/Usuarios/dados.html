@@ -1,0 +1,53 @@
+#{extends 'main.html' /} #{set title:'Dados usuarios' /}
+
+<meta charset="utf-8">
+<div class="card card-register mx-auto mt-5">
+    <div class="card-header">Criar conta </div>
+    <div class="card-body">
+        <form action="@{Usuarios.editar}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="usuario.id" value="${usuario?.id}">
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <label for="nome">Nome</label>
+                        <input class="form-control #{ifError 'usuario.nome'} is-invalid#{/ifError}" id="nome" type="text" value="${usuario == null ? flash['usuario.nome'] : usuario.nome}" name="usuario.nome" aria-describedby="nomeHelp" placeholder="Username">                        #{ifError 'usuario.nome'}
+                        <div class="invalid-feedback">#{error 'usuario.nome' /}</div>
+                        #{/ifError}
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input class="form-control #{ifError 'usuario.email'} is-invalid#{/ifError}" id="email" type="text" value="${usuario == null ? flash['usuario.email'] : usuario.email}" name="usuario.email" aria-describedby="emailHelp" placeholder="E-mail">                #{ifError 'usuario.email'}
+                <div class="invalid-feedback">#{error 'usuario.email' /}</div>
+                #{/ifError}
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label for="senha">Senha</label> <input class="form-control" placeholder="Passworld" name="usuario.senha" type="password" value="">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="senha">Confirmar Senha</label> <input class="form-control" placeholder="Confirm Password" name="confirmarSenha" type="password" value="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <input class="btn btn-success btn-block" type="submit" value="Atualizar">
+                    </div>
+                    <div class="col-md-6">
+                        <a href="@{Logins.login}" class="btn btn-danger btn-block">Cancelar</a>
+                    </div>
+                </div>
+
+        </form>
+        </div>
+    </div>
+</div>
