@@ -1,12 +1,11 @@
-
+#{extends 'main.html' /} 
+#{set title:'Lista de usuarios' /}
 
 <div class="card mb-3 container">
 <meta charset="UTF-8"/>
  <div class="card-header">
    <i class="fa fa-table"></i> Lista Jogadores</div>
  <div class="card-body">
- 
-   
     
      <table class="table dataTable" id="dataTable">
        <thead>
@@ -14,7 +13,7 @@
          <th rowspan="1" colspan="1">E-Mail</th>
          <th>Ações</th>
        </thead>
-       <tbody>
+     <tbody>
 	#{list items:usuarios, as:'usuario'}
 		<tr role="row">
            <td>${usuario.nome}</td>
@@ -27,15 +26,11 @@
 	</tbody>
     </table>
   </div>
+  <div class="form-group col-md-3">
+	<a href="@{Application.index}" class="btn btn-danger btn-block">Sair</a>
+</div>
+</div>
 </div>
 
-	<div class="row">
-		<div class="form-group col-md-2">
-			<a href="@{Usuarios.Cadastrousuario}" class="btn btn-success btn-block">Novo Cliente</a>
-		</div>
-
-		<div class="form-group col-md-2">
-			<a href="@{Application.index}" class="btn btn-danger btn-block">Sair</a>
-		</div>
-	</div>
+	
   

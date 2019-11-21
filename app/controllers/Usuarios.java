@@ -3,7 +3,6 @@ package controllers;
 
 import java.util.Date;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,8 +26,6 @@ import play.libs.Mail;
 import play.libs.WS;
 import play.libs.WS.HttpResponse;
 import play.mvc.Controller;
-
-
 
 public class Usuarios extends Controller{
 	
@@ -101,10 +98,11 @@ public class Usuarios extends Controller{
 		
 	}
 	
-	public static void detalhes(Usuario usuario){
-		render(usuario); 
-	}  
-    
+	public static void listagem(){
+		List<Usuario> usuarios = Usuario.findAll();
+		render(usuarios);
+		listagem();
+	}
 }
 	
 

@@ -1,44 +1,44 @@
-var TAMANHO_MAPA_X = 10; //Tamanho máximo recomendado 20
-var TAMANHO_MAPA_Y = 10; //Tamanho máximo recomendado 20, máximo = 99
-var TAMANHO_NAVIOS = [5,4,3,2]; //Cada número corresponde ao tamanho de um navio, é possível adicionar mais elementos ou modificar os números
+var TAMANHO_MAPA_X = 10; 
+var TAMANHO_MAPA_Y = 10; 
+var TAMANHO_NAVIOS = [5,4,3,2]; 
 var CORES = ["Aqua","Aquamarine","Bisque","Black","BlanchedAlmond"]
-var naviosJogador1 = []; //Array que guarda a posição dos navios do jogador1
-var naviosJogador2 = []; //Array que guarda a posição dos navios do Jogador2
-var naviosSemDestruidosJogador1 = []; //Array sem os navios que já foram destruidos do jogador1
-var naviosSemDestruidosJogador2 = []; //Array sem os navios que já foram destruidos do Jogador2 
-var valoresIntroduzidosJogador1 = []; //Array que grava os valores introduzidos pelo jogador1
-var valoresIntroduzidosJogador2 = []; //Array que grava os valores introduzidos pelo Jogador2
-var vezJogador1 = true; //Guarda de quem é a vez de jogar
-var acabouJogo = false; //Guarda o estado do jogo
-var numeroNavios = 0; //Cada subparte conta como 1
-var totalJogadas = 0; //Guarda o total de jogadas
+var naviosJogador1 = []; 
+var naviosJogador2 = []; 
+var naviosSemDestruidosJogador1 = []; 
+var naviosSemDestruidosJogador2 = []; 
+var valoresIntroduzidosJogador1 = []; 
+var valoresIntroduzidosJogador2 = []; 
+var vezJogador1 = true; 
+var acabouJogo = false; 
+var numeroNavios = 0; 
+var totalJogadas = 0; 
 var index = 0; //Guarda o index do navio que foi atingido
-var musicaFundo = new Audio('musicaFundo.mp3'); //Carrega as músicas
-var agua = new Audio('agua.mp3'); //Carrega as músicas
-var canhao = new Audio('canhao.mp3'); //Carrega as músicas
-var explosao = new Audio('explosao.mp3'); //Carrega as músicas
+var musicaFundo = new Audio('musicaFundo.mp3'); 
+var agua = new Audio('agua.mp3'); 
+var canhao = new Audio('canhao.mp3'); 
+var explosao = new Audio('explosao.mp3'); 
 
-//Primeira função a ser executada
+
 function Init() {
 	
 	configurarJogo();
 	}
 
-//Configuração do jogo
+
 function configurarJogo() {
 		
-	criarTabuleiro("tabuleiroJogador1"); //Cria o tabuleiro do jogador1
-	criarNavios("tabuleiroJogador1"); //Cria os navios do jogador1
-	carregarTabuleiro("tabuleiroJogador1"); //Coloca visíveis os navios do Jogador1
-	console.log(naviosJogador1); //Coloca a posição dos navios do jogador1 na consola
+	criarTabuleiro("tabuleiroJogador1"); 
+	criarNavios("tabuleiroJogador1"); 
+	carregarTabuleiro("tabuleiroJogador1"); 
+	console.log(naviosJogador1); 
 	
-	criarTabuleiro("tabuleiroJogador2"); //Cria o tabuleiro do Jogador2
-	criarNavios("tabuleiroJogador2"); //Cria os navios do Jogador2
+	criarTabuleiro("tabuleiroJogador2"); 
+	criarNavios("tabuleiroJogador2"); 
 	//carregarTabuleiro("tabuleiroJogador2"); //Coloca visíveis os navios do Jogador2
-	console.log(naviosJogador2); //Coloca a posição dos navios do jogador2 na consola
+	console.log(naviosJogador2); 
 	
 	//Define o tamanho da zona das informações
-	//
+	
 	var tamanho = 100 / (TAMANHO_MAPA_X + 1) * 0.01 * document.getElementById("tabuleiroJogador1").clientWidth;
 	document.getElementById("informacoes").style.marginTop = tamanho + "px";
 	document.getElementById("informacoes").style.height = document.getElementById("tabuleiroJogador1").clientWidth - tamanho + "px";
@@ -50,57 +50,56 @@ function configurarJogo() {
 	
 	//Avisa o jogador que pode jogar
 	document.getElementById("informacoesJogador1").innerHTML += "\r\nÉ a vez do jogador1!\r\n";
-	scrollAreaTexto("informacoesJogador1"); //Serve para dar scroll automaticamente caso a caixa de texto fique cheia
-}
+	scrollAreaTexto("informacoesJogador1"); 
+	}
 
 
-//Cria o tabuleiro com os botões
+
 function criarTabuleiro(tabuleiro) {
 	
-	//criarBotao(id, classe, texto, onClick, tabuleiro)
-	//Cria o primeiro botão 
+	
 	criarBotao(null, "botaoInformacao", null, null, tabuleiro);
 	
-	//Cria o resto dos botões da fila de cima
+	
 	for (var i = 65; i < 65 + TAMANHO_MAPA_X; i++) {
-		var letra = String.fromCharCode(i); //Muda o número i para a letra correspondente, A=65, B=66...
+		var letra = String.fromCharCode(i);
 		criarBotao(null, "botaoInformacao", letra, null, tabuleiro);
 	}
 	
 	for (var i = 1; i <= TAMANHO_MAPA_Y; i++) {
-		//Cria os botões da coluna da esquerda
+		
 		criarBotao(null, "botaoInformacao", i, null, tabuleiro);
 		
-		//Cria os botões do resto do tabuleiro
+		
 		for (var j = 65; j < 65 + TAMANHO_MAPA_X; j++) {
 			var letra = String.fromCharCode(j);
 			
 			if (tabuleiro === "tabuleiroJogador1") {
-				var id = "botaoJ" + letra + i; //ID=botaoJA1 ou botaoJB4...
+				var id = "botaoJ" + letra + i; ...
 			}
 			else {
-				var id = "botaoC" + letra + i; //ID=botaoCA1 ou botaoJC2...
+				var id = "botaoC" + letra + i; 
 			}
 			
-			//Função a ser executada quando o usuário clica no botão
+			//quando o usuário clica no botão
 			if (tabuleiro === "tabuleiroJogador1") {
 				var funcao = function(){ 
-					if ((vezJogador1) && (!acabouJogo)) { //O botão apenas funciona se for a vez do jogador e o jogo não tiver acabado
-						if (jogo(this.id.charAt(6), this.id.charAt(7) + this.id.charAt(8), tabuleiro)){; //Executa a função jogo com algums argumentos
-							vezJogador1 = false; //Impede o jogador1 de jogar
+					if ((vezJogador1) && (!acabouJogo)) { //se for a vez do jogador
+						if (jogo(this.id.charAt(6), this.id.charAt(7) + this.id.charAt(8), tabuleiro)){; //Executa a função 
+							vezJogador1 = false; //Impede o jogdor 1 de jogar
 							document.getElementById("informacoesJogador2").innerHTML += "\r\nÉ a vez do jogador2!\r\n";
-							scrollAreaTexto("informacoesJogador2"); //Caso a área de texto esteja cheia, dá scroll automaticamente
+							scrollAreaTexto("informacoesJogador2"); 
 						};
 					}
 				}
 			}
 			else {
 				var funcao = function() { 
-					if ((!vezJogador1) && (!acabouJogo)) { //O botão apenas funciona se for a vez do jogador e o jogo não tiver acabado
+					if ((!vezJogador1) && (!acabouJogo)) { //se for a vez do jogador
 						if (jogo(this.id.charAt(6), this.id.charAt(7) + this.id.charAt(8), tabuleiro)){; //Executa a função jogo com algums argumentos
 							vezJogador1 = true; //Impede o jogador2 de jogar
 							document.getElementById("informacoesJogador1").innerHTML += "\r\nÉ a vez do jogador1!\r\n";
-							scrollAreaTexto("informacoesJogador1"); //Caso a área de texto esteja cheia, dá scroll automaticamente		
+							scrollAreaTexto("informacoesJogador1"); 		
 						};
 					}
 				}
@@ -134,51 +133,6 @@ function carregarTabuleiro(tabuleiro){
 }
 
 ////////////////////////////////////////////////////
-var imagem=[];
-
-function carregarImagem(){
-   var i, ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100, 101, 102, 103, 201, 202, 203, 204, 205, 206];
-    window.status = "Precarregando as imagens.";
-    for (i = 0; i < ids.length; ++i) {
-        var img = new Image,
-            name = "public/images/batt" + ids[i] + ".gif";
-        img.src = name;
-        preloaded[i] = img;
-    }
-    window.status = "";
-}
-
-function setImage(y, x, id, ispc) {
-    if (ispc) {
-        computer[y][x][0] = id;
-        document.images["pc" + y + "_" + x].src = "public/images/batt" + id + ".gif";
-    } else {
-        player[y][x][0] = id;
-        document.images["ply" + y + "_" + x].src = "public/images/batt" + id + ".gif";
-    }
-}
-
-/* Função para desenhar o plano cartesiano */
-function showGrid(ispc) {
-    var y, x;
-    for (y = 0; y < gridy; ++y) {
-        for (x = 0; x < gridx; ++x) {
-            if (ispc)
-                document.write('<a href="javascript:gridClick(' + y + ',' + x + ');"><img name="pc' + y + '_' + x + '" src="public/images/001.jpg" width=30 height=30></a>');
-            else
-                document.write('<a href="javascript:void(0);"><img name="ply' + y + '_' + x + '" src="public/images/batt' + player[y][x][0] + '.gif" width=30 height=30></a>');
-        }
-        document.write('<br>');
-    }
-}
-
-
-
-
-
-
-
-
 
 function corAleatoria() {
 	var cor = Math.floor(Math.random() * CORES.length);
@@ -186,9 +140,9 @@ function corAleatoria() {
 }
 
 
-//Cria os botões
+
 function criarBotao(id, classe, texto, onClick, tabuleiro) {
-	var botao = document.createElement("button"); //Variável com o botão
+	var botao = document.createElement("button"); 
 	botao.type = "button";
 	
 	
@@ -199,7 +153,7 @@ function criarBotao(id, classe, texto, onClick, tabuleiro) {
 	botao.style.height = altura + "px";
 	
 	
-	//Define a classe
+	//define a vez
 	if ((classe === "botaoJogo") && (tabuleiro === "tabuleiroJogador1")) {
 		botao.className = "botaoJogador";
 	}
@@ -210,7 +164,7 @@ function criarBotao(id, classe, texto, onClick, tabuleiro) {
 		botao.className = classe;
 	}
 	
-	//Apenas define os valores se estes forem diferentes de null
+	
 	if (id != null) {
 		botao.id = id;
 	}
@@ -225,7 +179,7 @@ function criarBotao(id, classe, texto, onClick, tabuleiro) {
 }
 
 
-//Gere a criação de navios
+// criação de navios
 function criarNavios(tabuleiro) {
 	
 	if (tabuleiro === "tabuleiroJogador1") {
@@ -239,12 +193,12 @@ function criarNavios(tabuleiro) {
 	
 	
 	for (var i = 0; i < TAMANHO_NAVIOS.length; i++) {
-		navios[i] = criarNavio(TAMANHO_NAVIOS[i], tabuleiro); //Guarda o navio criado no array navios
-		numeroNavios += TAMANHO_NAVIOS[i] / 2; //Adiciona o número de subpartes do navio adicionado
+		navios[i] = criarNavio(TAMANHO_NAVIOS[i], tabuleiro);
+		numeroNavios += TAMANHO_NAVIOS[i] / 2; 
 	}
 	
 	for (var i = 0; i < navios.length; i++) {
-		naviosSemDestruidos[i] = navios[i].slice(); //Copia o array navios para o array naviosSemDestruidos
+		naviosSemDestruidos[i] = navios[i].slice(); 
 	}	
 }
 
@@ -252,18 +206,18 @@ function criarNavios(tabuleiro) {
 //Cria os navios
 function criarNavio(tamanho, tabuleiro) {
 	
-	var foraDoMapa = true; //Usado para saber se o navio criado está fora do mapa
-	var colideComOutroNavio = true; //Usado para saber se o navio criado colidiu com outro navio
-	var navio; //Guarda a posição do navio
+	var foraDoMapa = true; 
+	var colideComOutroNavio = true; 
+	var navio; // posição do navio
 	
 	while (foraDoMapa || colideComOutroNavio) { //Enquanto o navio estiver fora do mapa ou colidir com outro barco, gerar outro navio
-		var navio = []; //Reset
-		foraDoMapa = true; //Reset
-		colideComOutroNavio = true; //Reset
+		var navio = []; 
+		foraDoMapa = true; 
+		colideComOutroNavio = true; 
 		var posicaoInicial = gerarPosicaoAleatoria(); //Gera a posição aleatória
-		var posicaoInicialX = posicaoInicial.charCodeAt(0); //Letra - X
-		var posicaoInicialY = parseInt(posicaoInicial.charAt(1) + posicaoInicial.charAt(2)); //Número - Y 
-		var orientacao = Math.round(Math.random());//Gera um valor entre 0 e 1 para decidir a orientação do navio, 1 = horizontal.
+		var posicaoInicialX = posicaoInicial.charCodeAt(0);
+		var posicaoInicialY = parseInt(posicaoInicial.charAt(1) + posicaoInicial.charAt(2)); 
+		var orientacao = Math.round(Math.random());
 		
 		for (i = 0; i < tamanho; i++) { 
 			if (orientacao) { //Cria o navio na horizontal
@@ -275,31 +229,31 @@ function criarNavio(tamanho, tabuleiro) {
 				navio.push(String.fromCharCode(posicaoInicialX) + posicaoFinalY);
 			}
 		}
-		foraDoMapa = colisoesNavioMapa(navio); //Verifica se o navio está fora do mapa
-		colideComOutroNavio = colisoesNavioNavio(navio, tabuleiro); //Verifica se o navio colidiu com outro navio
+		foraDoMapa = colisoesNavioMapa(navio); 
+		colideComOutroNavio = colisoesNavioNavio(navio, tabuleiro); 
 	}
-	return navio; //Devolve o navio criado
+	return navio; //mostra navio criado
 }
 
 
-//Gera a posição aleatória
+
 function gerarPosicaoAleatoria() {
 	
-	var letraAleatoria = String.fromCharCode(65 + Math.floor(Math.random() * (TAMANHO_MAPA_X))); // Entre A e a última letra
-	var numeroAleatorio = 1 + Math.floor(Math.random() * (TAMANHO_MAPA_Y)); // Entre 1 e último número
+	var letraAleatoria = String.fromCharCode(65 + Math.floor(Math.random() * (TAMANHO_MAPA_X))); 
+	var numeroAleatorio = 1 + Math.floor(Math.random() * (TAMANHO_MAPA_Y)); 
 	//console.log(letraAleatoria + numeroAleatorio);
-	return letraAleatoria + numeroAleatorio; //Devolve os valores
+	return letraAleatoria + numeroAleatorio; 
 }
 
 
-//Verifica se o navio está fora do mapa
+
 function colisoesNavioMapa(navio) { 
 	
 	for (var i = 0; i < navio.length; i++) {
-		if (navio[i].charAt(0).charCodeAt(0) > 64 + TAMANHO_MAPA_X) { //.charAt(0).charCodeAt(0) devolvem o número correspondente à letra
+		if (navio[i].charAt(0).charCodeAt(0) > 64 + TAMANHO_MAPA_X) { //número correspondente à letra
 			return true;
 		}
-		if (navio[i].charAt(1) + navio[i].charAt(2)> TAMANHO_MAPA_Y) { // Temos que verificar o 1º e o 2º digito pois o número pode ter mais que um digito
+		if (navio[i].charAt(1) + navio[i].charAt(2)> TAMANHO_MAPA_Y) { //caso o numero tenha mais de um digito
 			return true;
 		}
 	}
@@ -317,7 +271,7 @@ function colisoesNavioNavio(navio, tabuleiro) {
 		var navios = naviosJogador2;
 	}
 
-	//Compara todos as posições do navio com a dos outros navios
+	//Compara todos as posições do navio 
 	for (var i = 0; i < navio.length; i++) {
 		for (var j = 0; j < navios.length; j++) {
 			for (var k = 0; k < navios[j].length; k++) {
@@ -331,7 +285,7 @@ function colisoesNavioNavio(navio, tabuleiro) {
 }
 
 
-//Função principal
+
 function jogo(letra, numero, tabuleiro) {
 	
 	if (!verificarJogada(letra, numero, tabuleiro)) { //Verifica se a jogada é válida
